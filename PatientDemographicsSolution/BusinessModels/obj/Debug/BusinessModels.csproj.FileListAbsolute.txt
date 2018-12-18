@@ -1,0 +1,13 @@
+V:\2015Programs\PatientDemographics\PatientDemographicsSolution\BusinessModels\bin\Debug\BusinessModels.dll
+V:\2015Programs\PatientDemographics\PatientDemographicsSolution\BusinessModels\bin\Debug\BusinessModels.pdb
+V:\2015Programs\PatientDemographics\PatientDemographicsSolution\BusinessModels\obj\Debug\BusinessModels.dll
+V:\2015Programs\PatientDemographics\PatientDemographicsSolution\BusinessModels\obj\Debug\BusinessModels.pdb
+V:\2015Programs\PatientDemographics\PatientDemographicsSolution\BusinessModels\obj\Debug\BusinessModels.csprojResolveAssemblyReference.cache
+V:\2015Programs\HarmanAssessment\PatientDemographicsSolution\BusinessModels\bin\Debug\BusinessModels.dll
+V:\2015Programs\HarmanAssessment\PatientDemographicsSolution\BusinessModels\bin\Debug\BusinessModels.pdb
+V:\2015Programs\HarmanAssessment\PatientDemographicsSolution\BusinessModels\obj\Debug\BusinessModels.dll
+V:\2015Programs\HarmanAssessment\PatientDemographicsSolution\BusinessModels\obj\Debug\BusinessModels.pdb
+V:\2015Programs\HarmanAssessmentReview\PatientDemographicsSolution\BusinessModels\bin\Debug\BusinessModels.dll
+V:\2015Programs\HarmanAssessmentReview\PatientDemographicsSolution\BusinessModels\bin\Debug\BusinessModels.pdb
+V:\2015Programs\HarmanAssessmentReview\PatientDemographicsSolution\BusinessModels\obj\Debug\BusinessModels.dll
+V:\2015Programs\HarmanAssessmentReview\PatientDemographicsSolution\BusinessModels\obj\Debug\BusinessModels.pdb
