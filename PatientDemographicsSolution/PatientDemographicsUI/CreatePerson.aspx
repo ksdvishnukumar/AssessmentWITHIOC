@@ -129,7 +129,7 @@
                         <div class="cols-sm-3">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                <input type="text" runat="server" class="form-control" name="homenumber" id="homenumber" placeholder="Enter your Home Number" />
+                                <input type="text" runat="server" class="form-control" name="homenumber" id="homenumber" maxlength="10" placeholder="Enter your Home Number" />
                             </div>
                         </div>
                         <%--<div >
@@ -141,7 +141,7 @@
                         <div class="cols-sm-3">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                <input type="text" runat="server" class="form-control" name="worknumber" id="worknumber" placeholder="Enter your Work Number" />
+                                <input type="text" runat="server" class="form-control" name="worknumber" id="worknumber" maxlength="10" placeholder="Enter your Work Number" />
                             </div>
                         </div>
                         <%--<div >
@@ -156,7 +156,7 @@
                         <div class="cols-sm-3">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                <input type="text" runat="server" class="form-control" name="phonenumber" id="phonenumber" placeholder="Enter your Phone Number" />
+                                <input type="text" runat="server" class="form-control" name="phonenumber" id="phonenumber" maxlength="10" placeholder="Enter your Phone Number" />
                             </div>
                         </div>
                         <%--<div >
@@ -180,36 +180,38 @@
         <script src="Scripts/bootstrap.min.js"></script>
         <script type="text/javascript">
             $("#btnSave").click(function () {
-                var sendInfo = {
-                    Forename: $('#forename').val(),
-                    Surname: $('#surname').val(),
-                    DOB: $('#dob').val(),
-                    Gender: $("#gender").val(),
-                    TelephoneNumbers:
-                        {
-                            HomeNumber: $('#homenumber').val(),
-                            WorkNumber: $('#worknumber').val(),
-                            PhoneNumber: $('#phonenumber').val()
-                        }
-                };
+                if (ValidateInput()) {
+                    var sendInfo = {
+                        Forename: $('#forename').val(),
+                        Surname: $('#surname').val(),
+                        DOB: $('#dob').val(),
+                        Gender: $("#gender").val(),
+                        TelephoneNumbers:
+                            {
+                                HomeNumber: $('#homenumber').val(),
+                                WorkNumber: $('#worknumber').val(),
+                                PhoneNumber: $('#phonenumber').val()
+                            }
+                    };
 
-                $.ajax({
-                    type: 'post',
-                    url: 'http://localhost:1866/api/Person/SavePerson',
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data)
-                        alert(data)
-                        $("#btnClear").click();
-                    },
-                    failure: function (data) {
-                        alert(data.statusText);
-                    },
-                    error: function (data) {
-                        alert(data.statusText);
-                    },
-                    data: sendInfo
-                });
+                    $.ajax({
+                        type: 'post',
+                        url: 'http://localhost:1866/api/Person/SavePerson',
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log(data)
+                            alert(data)
+                            $("#btnClear").click();
+                        },
+                        failure: function (data) {
+                            alert(data.statusText);
+                        },
+                        error: function (data) {
+                            alert(data.statusText);
+                        },
+                        data: sendInfo
+                    });
+                }
             });
 
             $("#btnClear").click(function () {
@@ -221,6 +223,51 @@
                 $('#worknumber').val("");
                 $('#phonenumber').val("");
             });
+
+            function ValidateInput() {
+                var parsedNumber;
+                if ($('#homenumber').val().trim() != "") {
+                    parsedNumber = parseInt($('#homenumber').val());
+                    if (isNaN(parsedNumber)) {
+                        alert("Home Number can have only Number. It should be 10 digit.")
+                        return false;
+                    }
+                    else {
+                        if (parsedNumber.toString().length != 10 && parsedNumber != 0) {
+                            alert("Home Number is not a valid number. It should be 10 digit.")
+                            return false;
+                        }
+                    }
+                }
+
+                if ($('#worknumber').val().trim() != "") {
+                    parsedNumber = parseInt($('#worknumber').val());
+                    if (isNaN(parsedNumber)) {
+                        alert("Work Number can have only Number. It should be 10 digit.")
+                        return false;
+                    }
+                    else {
+                        if (parsedNumber.toString().length != 10 && parsedNumber != 0) {
+                            alert("Work Number is not a valid number. It should be 10 digit.")
+                            return false;
+                        }
+                    }
+                }
+
+                if ($('#phonenumber').val().trim() != "") {
+                    parsedNumber = parseInt($('#phonenumber').val());
+                    if (isNaN(parsedNumber)) {
+                        alert("Phone Number can have only Number. It should be 10 digit.")
+                        return false;
+                    }
+                    else {
+                        if (parsedNumber.toString().length != 10 && parsedNumber != 0) {
+                            alert("Phoness Number is not a valid number. It should be 10 digit.")
+                            return false;
+                        }
+                    }
+                }
+            }
         </script>
     </form>
 </body>

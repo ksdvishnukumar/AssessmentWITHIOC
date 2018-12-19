@@ -11,7 +11,7 @@
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
 
     <script>
-        function ValidateInput() {
+        function ValidateMandatoryInput() {
             //Validate Mandatory Field
             var InputField = 'forename,T;surname,T;gender,S'
             var sp_Ctrl = InputField.split(';');
@@ -206,38 +206,85 @@
             });
 
             $("#btnUpdate").click(function () {
-                if (ValidateInput()) {
-                    var sendInfo = {
-                        Forename: $('#forename').val(),
-                        Surname: $('#surname').val(),
-                        DOB: $('#dob').val(),
-                        Gender: $("#gender").val(),
-                        TelephoneNumbers:
-                            {
-                                HomeNumber: $('#homenumber').val(),
-                                WorkNumber: $('#worknumber').val(),
-                                PhoneNumber: $('#phonenumber').val()
-                            }
-                    };
+                if (ValidateMandatoryInput()) {
+                    if (ValidateOptionalInput()) {
+                        var sendInfo = {
+                            Forename: $('#forename').val(),
+                            Surname: $('#surname').val(),
+                            DOB: $('#dob').val(),
+                            Gender: $("#gender").val(),
+                            TelephoneNumbers:
+                                {
+                                    HomeNumber: $('#homenumber').val(),
+                                    WorkNumber: $('#worknumber').val(),
+                                    PhoneNumber: $('#phonenumber').val()
+                                }
+                        };
 
-                    $.ajax({
-                        type: 'put',
-                        url: 'http://localhost:1866/api/Person/' + $('#hdnPID').val(),
-                        dataType: 'json',
-                        success: function (data) {
-                            console.log(data)
-                            alert(data)                            
-                        },
-                        failure: function (data) {
-                            alert(data.statusText);
-                        },
-                        error: function (data) {
-                            alert(data.statusText);
-                        },
-                        data: sendInfo
-                });
-            }
+                        $.ajax({
+                            type: 'put',
+                            url: 'http://localhost:1866/api/Person/' + $('#hdnPID').val(),
+                            dataType: 'json',
+                            success: function (data) {
+                                console.log(data)
+                                alert(data)
+                            },
+                            failure: function (data) {
+                                alert(data.statusText);
+                            },
+                            error: function (data) {
+                                alert(data.statusText);
+                            },
+                            data: sendInfo
+                        });
+                    }
+                }
             });
+
+            function ValidateOptionalInputs() {
+                var parsedNumber;
+                if ($('#homenumber').val().trim() != "") {
+                    parsedNumber = parseInt($('#homenumber').val());
+                    if (isNaN(parsedNumber)) {
+                        alert("Home Number can have only Number. It should be 10 digit.")
+                        return false;
+                    }
+                    else {
+                        if (parsedNumber.toString().length != 10 && parsedNumber != 0) {
+                            alert("Home Number is not a valid number. It should be 10 digit.")
+                            return false;
+                        }
+                    }
+                }
+
+                if ($('#worknumber').val().trim() != "") {
+                    parsedNumber = parseInt($('#worknumber').val());
+                    if (isNaN(parsedNumber)) {
+                        alert("Work Number can have only Number. It should be 10 digit.")
+                        return false;
+                    }
+                    else {
+                        if (parsedNumber.toString().length != 10 && parsedNumber != 0) {
+                            alert("Work Number is not a valid number. It should be 10 digit.")
+                            return false;
+                        }
+                    }
+                }
+
+                if ($('#phonenumber').val().trim() != "") {
+                    parsedNumber = parseInt($('#phonenumber').val());
+                    if (isNaN(parsedNumber)) {
+                        alert("Phone Number can have only Number. It should be 10 digit.")
+                        return false;
+                    }
+                    else {
+                        if (parsedNumber.toString().length != 10 && parsedNumber != 0) {
+                            alert("Phoness Number is not a valid number. It should be 10 digit.")
+                            return false;
+                        }
+                    }
+                }
+            }
 
         </script>
     </form>
