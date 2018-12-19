@@ -13,7 +13,7 @@
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
 
     <script>
-        function ValidateInput() {
+        function ValidateMandatoryInput() {
             //Validate Mandatory Field
             var InputField = 'forename,T;surname,T;gender,S'
             var sp_Ctrl = InputField.split(';');
@@ -180,37 +180,39 @@
         <script src="Scripts/bootstrap.min.js"></script>
         <script type="text/javascript">
             $("#btnSave").click(function () {
-                if (ValidateInput()) {
-                    var sendInfo = {
-                        Forename: $('#forename').val(),
-                        Surname: $('#surname').val(),
-                        DOB: $('#dob').val(),
-                        Gender: $("#gender").val(),
-                        TelephoneNumbers:
-                            {
-                                HomeNumber: $('#homenumber').val(),
-                                WorkNumber: $('#worknumber').val(),
-                                PhoneNumber: $('#phonenumber').val()
-                            }
-                    };
+                if (ValidateMandatoryInput()) {
+					if (ValidateOptionalInput()) {
+						var sendInfo = {
+							Forename: $('#forename').val(),
+							Surname: $('#surname').val(),
+							DOB: $('#dob').val(),
+							Gender: $("#gender").val(),
+							TelephoneNumbers:
+								{
+									HomeNumber: $('#homenumber').val(),
+									WorkNumber: $('#worknumber').val(),
+									PhoneNumber: $('#phonenumber').val()
+								}
+						};
 
-                    $.ajax({
-                        type: 'post',
-                        url: 'http://localhost:1866/api/Person/SavePerson',
-                        dataType: 'json',
-                        success: function (data) {
-                            console.log(data)
-                            alert(data)
-                            $("#btnClear").click();
-                        },
-                        failure: function (data) {
-                            alert(data.statusText);
-                        },
-                        error: function (data) {
-                            alert(data.statusText);
-                        },
-                        data: sendInfo
-                    });
+						$.ajax({
+							type: 'post',
+							url: 'http://localhost:1866/api/Person/SavePerson',
+							dataType: 'json',
+							success: function (data) {
+								console.log(data)
+								alert(data)
+								$("#btnClear").click();
+							},
+							failure: function (data) {
+								alert(data.statusText);
+							},
+							error: function (data) {
+								alert(data.statusText);
+							},
+							data: sendInfo
+						});
+					}
                 }
             });
 
@@ -224,7 +226,7 @@
                 $('#phonenumber').val("");
             });
 
-            function ValidateInput() {
+            function ValidateOptionalInput() {
                 var parsedNumber;
                 if ($('#homenumber').val().trim() != "") {
                     parsedNumber = parseInt($('#homenumber').val());
